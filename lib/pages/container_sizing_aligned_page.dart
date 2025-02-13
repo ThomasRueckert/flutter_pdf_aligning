@@ -45,7 +45,8 @@ class ContainerSizingAlignedPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () => Navigator.of(context).pushNamed('/text-sizing-aligned'),
+                onPressed: () =>
+                    Navigator.of(context).pushNamed('/text-sizing-aligned'),
                 child: const Text('page 1'),
               ),
               ElevatedButton(onPressed: save, child: const Text('Save')),
