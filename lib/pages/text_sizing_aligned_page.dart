@@ -8,12 +8,7 @@ class TextSizingAlignedPage extends StatelessWidget {
   TextSizingAlignedPage({super.key});
 
   final ExportDelegate exportDelegate = ExportDelegate(
-    ttfFonts: {
-      'Poppins': 'fonts/Poppins/Poppins-Regular.ttf',
-      'Helvetica': 'fonts/Helvetica/Helvetica.ttf',
-      'Roboto': 'fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf',
-      'Ubuntu': 'fonts/Ubuntu/Ubuntu-Regular.ttf',
-    },
+    ttfFonts: {'Ubuntu': 'fonts/Ubuntu/Ubuntu-Regular.ttf'},
     options: ExportOptions(
       pageFormatOptions: const PageFormatOptions(
         pageFormat: PageFormat.custom,
