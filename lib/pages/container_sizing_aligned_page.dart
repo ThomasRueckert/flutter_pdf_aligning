@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_to_pdf/flutter_to_pdf.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 
 class ContainerSizingAlignedPage extends StatelessWidget {
   ContainerSizingAlignedPage({super.key});
@@ -10,18 +9,17 @@ class ContainerSizingAlignedPage extends StatelessWidget {
   final ExportDelegate exportDelegate = ExportDelegate(
     ttfFonts: {'Ubuntu': 'fonts/Ubuntu/Ubuntu-Regular.ttf'},
     options: ExportOptions(
-      pageFormatOptions: const PageFormatOptions(
-        pageFormat: PageFormat.custom,
-        width: 21.0 * PdfPageFormat.cm,
-        height: 29.7 * PdfPageFormat.cm,
-        marginTop: 0.0 * PdfPageFormat.cm,
-        marginBottom: 0.0 * PdfPageFormat.cm,
-        marginLeft: 0.0 * PdfPageFormat.cm,
-        marginRight: 0.0 * PdfPageFormat.cm,
-      ),
-      textFieldOptions: const TextFieldOptions.individual(interactive: false),
-      checkboxOptions: CheckboxOptions.uniform(interactive: false),
-    ),
+        pageFormatOptions: const PageFormatOptions(
+          pageFormat: PageFormat.custom,
+          width: 595,
+          height: 842,
+          marginTop: 0,
+          marginBottom: 0,
+          marginLeft: 0,
+          marginRight: 0,
+        ),
+        textFieldOptions: const TextFieldOptions.individual(interactive: true),
+        checkboxOptions: CheckboxOptions.uniform(interactive: false)),
   );
 
   final bodyText16 = const TextStyle(
@@ -30,11 +28,13 @@ class ContainerSizingAlignedPage extends StatelessWidget {
     fontSize: 20,
     color: Colors.black,
     height:
-        1.12, // close - would be perfect around 1.125 - but that's being rounded to 1.13
-    letterSpacing: 0.0025, // perfect match
-    wordSpacing: 1.5, // perfect match
+        1.13, // close - would be perfect around 1.125 - but that's being rounded to 1.13
+    letterSpacing: 0.02, // perfect match
+    wordSpacing: 1.25, // perfect match
     textBaseline: TextBaseline.alphabetic,
   );
+
+  static const double perfectScale = 1.00;
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +63,8 @@ class ContainerSizingAlignedPage extends StatelessWidget {
                   exportDelegate: exportDelegate,
                   frameId: 'someFrameId', // identifies the frame
                   child: Container(
-                    width: 21.0 * PdfPageFormat.cm,
-                    height: 29.7 * PdfPageFormat.cm,
+                    width: 595,
+                    height: 842,
                     child: Column(
                       children: [
                         Container(
@@ -75,7 +75,10 @@ class ContainerSizingAlignedPage extends StatelessWidget {
                           ),
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text("200 - 200", style: bodyText16),
+                            child: Text("200 - 200",
+                                style: bodyText16,
+                                textScaler:
+                                    const TextScaler.linear(perfectScale)),
                           ),
                         ),
                         Container(
@@ -86,7 +89,10 @@ class ContainerSizingAlignedPage extends StatelessWidget {
                           ),
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text("100 - 100", style: bodyText16),
+                            child: Text("100 - 100",
+                                style: bodyText16,
+                                textScaler:
+                                    const TextScaler.linear(perfectScale)),
                           ),
                         ),
                         Container(
@@ -97,8 +103,21 @@ class ContainerSizingAlignedPage extends StatelessWidget {
                           ),
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text("50 - 50", style: bodyText16),
+                            child: Text("50 - 50",
+                                style: bodyText16,
+                                textScaler:
+                                    const TextScaler.linear(perfectScale)),
                           ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1.0),
+                          ),
+                          child: Text(
+                              "Lorem ipsum, uti salvus iungo pareo principium infra. Illa curso, voro malum acer hoc tutamen rogo. Comperio levus, donum pyus. Quero, explicatus. Traho monitio, cado rideo ictus. Dolor libere, agere moti. Rutum ascit, nimis senis profero, cessi. Pre meminisse quin. Causa, decor puchre sepe feteo dimidium profari. Emerio promissio urbis tunc prae. Pergo, velut lebes nota. Hi quin illi secus.",
+                              style: bodyText16,
+                              textScaler:
+                                  const TextScaler.linear(perfectScale)),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -107,6 +126,7 @@ class ContainerSizingAlignedPage extends StatelessWidget {
                           child: Text(
                             "Lorem ipsum, uti salvus iungo pareo principium infra. Illa curso, voro malum acer hoc tutamen rogo. Comperio levus, donum pyus. Quero, explicatus. Traho monitio, cado rideo ictus. Dolor libere, agere moti. Rutum ascit, nimis senis profero, cessi. Pre meminisse quin. Causa, decor puchre sepe feteo dimidium profari. Emerio promissio urbis tunc prae. Pergo, velut lebes nota. Hi quin illi secus.",
                             style: bodyText16,
+                            textScaler: const TextScaler.linear(perfectScale),
                           ),
                         ),
                       ],
